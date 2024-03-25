@@ -1,23 +1,22 @@
-from tasks.VersionedRTask import VersionedRTask
-from tasks.Rtask import Rtask
+from tasks.Rtask import RtaskBuilder
 
-t1 = Rtask(name='task1', openLog=False) \
+sc_rna_for_all = RtaskBuilder(name='task1', openLog=False) \
     .setScript('R/test1in1out.R') \
     .setInputs(['data/testInput.txt']) \
-    .setOutputs(['input2']).build()
+    .setOutputs(['res/input2']).build()
 
-t2 = Rtask(name='task2', openLog=False) \
+t2 = RtaskBuilder(name='task2', openLog=False) \
     .setScript('R/test1in1out.R') \
-    .setInputs([t1]) \
-    .setOutputs(['input3']).build()
+    .setInputs([sc_rna_for_all]) \
+    .setOutputs(['res/input3']).build()
 
-t3 = VersionedRTask(name='task3', openLog=False) \
+t3 = RtaskBuilder(name='task3', openLog=False) \
     .setScript('R/test1in1out.R') \
-    .setInputs([t1]) \
-    .setOutputs(['input3']).build()
+    .setInputs([sc_rna_for_all]) \
+    .setVersionedOutputs(['res/input3']).build()
 
 
-t4 = Rtask(name='task4', openLog=False) \
+t4 = RtaskBuilder(name='task4', openLog=False) \
     .setScript('R/test1in1out.R') \
     .setInputs([t3]) \
-    .setOutputs(['input4']).build()
+    .setOutputs(['res/input4']).build()
