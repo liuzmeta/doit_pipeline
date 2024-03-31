@@ -42,10 +42,7 @@ class RtaskBuilder:
         _outputs = []
         for output in outputs:
             _output = self.utils.toAbsPath(output)
-            if _output.is_dir():
-                _output.mkdir(parents=True, exist_ok=True)
-            else:
-                _output.parent.mkdir(parents=True, exist_ok=True)
+            _output.parent.mkdir(parents=True, exist_ok=True)
             _outputs.append(_output)
         self.rtask.outputs = _outputs
         return self
